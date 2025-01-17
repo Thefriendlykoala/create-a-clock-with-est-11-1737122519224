@@ -1,0 +1,5 @@
+  const utcOffset = date.getTimezoneOffset();
+  const estOffset = utcOffset + 300; // EST is UTC-5
+  const estTime = new Date(date.getTime() + estOffset * 60000);
+  return estTime.toLocaleTimeString('en-US', { hour12: true });
+};
