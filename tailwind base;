@@ -1,0 +1,7 @@
+@tailwind utilities;
+
+@layer components {
+  .container {
+    @apply flex justify-center items-center min-h-screen;
+  }
+}
