@@ -1,0 +1,36 @@
+import clsx from 'clsx';
+import { Sun, Moon } from '@radix-ui/react-icons';
+import { getESTTime } from '../utils/timeUtils';
+
+const Clock: React.FC = () => {
+  const [time, setTime] = useState<string>(getESTTime());
+  const [darkMode, setDarkMode] = useState<boolean>(false);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(getESTTime());
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.documentElement.classList.toggle('dark');
+  };
+
+  return (
+    <div className={merge('container mx-auto p-4', darkMode ? 'dark' : '')}>
+      <div className="flex items-center justify-between">
+        <h1 className="text-4xl font-bold">{time}</h1>
+        <button onClick={toggleDarkMode} className="ml-4">
+          {darkMode ? <Sun className="w-6 h-6" /> : <Moon className="w-6 h-6" />}
+        </button>
+      </div>
+    </div>
+  );
+};
+
+export default Clock;
